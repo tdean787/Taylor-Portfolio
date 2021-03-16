@@ -1,0 +1,11 @@
+canvas {
+  background-color: #232323;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.container {
+  background-color: #f1f1f1;
+  height: 100vh;
+  text-align: center;
+}

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="default.css" type="text/css" />
+    <link id="theme-style" rel="stylesheet" type="text/css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Russo+One&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@500&family=Russo+One&display=swap"
+      rel="stylesheet"
+    />
+    <script
+      src="https://kit.fontawesome.com/0e1ea99480.js"
+      crossorigin="anonymous"
+    ></script>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
+        <!-- Latest compiled and minified CSS -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.7.0/d3.min.js"></script>
+        <!-- Optional theme -->
+        <link rel="stylesheet" href="charts.css" type="text/css" />
+    <title>ChartsJS Texas Population Visualization</title>
+  </head>
+  <body>
+    <section class="s1">
+      <div class="main-container">
+        <div class="greeting-wrapper">
+          <h1>ChartJS and D3 Visualization</h1>
+        </div>
+
+        <div class="intro-wrapper">
+          <div class="nav-wrapper">
+            <div class="dots-wrapper">
+              <div class="browser-dot" id="dot-1"></div>
+              <div class="browser-dot" id="dot-2"></div>
+              <div class="browser-dot" id="dot-3"></div>
+            </div>
+
+            <ul id="navigation">
+              <li><a href="index.html"> Home </a></li>
+              <li>
+                <a href="https://taylordean.net/#contact-form"> Contact </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+    <div class="container">
+      <canvas id="chart"></canvas>    <h4>Check out the source code on GitHub</h4>
+      <a target="_blank" href="https://github.com/tdean787/TexasPopChartsJS">GitHub repo link</a>
+
+    </div>
+
+    <script>
+      d3.csv("texas.csv").then(makeChart);
+
+      function makeChart(cities) {
+        let cityLabels = cities.map(function (d) {
+          return d.Name;
+        });
+        let popData = cities.map(function (d) {
+          return d.Estimate;
+        });
+        let dataColors = cities.map(function (d) {
+          return "#A04428";
+        });
+
+        let chart = new Chart("chart", {
+          type: "horizontalBar",
+          options: {
+            legend: {
+              display: false,
+            },
+            title: {
+              display: true,
+              text: "Texas City Population from 2010 Census",
+              fontSize: 18,
+              fontColor: "white",
+            },
+            scales: {
+              yAxes: [
+                {
+                  ticks: {
+                    fontColor: "white",
+                  },
+                },
+              ],
+            },
+          },
+
+          data: {
+            labels: cityLabels,
+            datasets: [
+              {
+                data: popData,
+                backgroundColor: dataColors,
+              },
+            ],
+          },
+        });
+      }
+    </script>
+
+  </body>
+</html>
